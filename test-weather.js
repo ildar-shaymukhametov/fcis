@@ -9,6 +9,17 @@ const date_today = today.toISOString().slice(0,10)
 console.log('todays date is', date_today)
 const filename = './weather-' + date_today + '.json'
 
+// Stubs
+async function weather_stub() {
+  return Promise.resolve({
+    name: 'London',
+    weather: [
+      { main: 'Clouds' }
+    ]
+  })
+}
+
+// Setup
 function delete_existing_weather_file() {
   if (fs.existsSync(filename)) {
     console.log('removing data file')
@@ -18,8 +29,9 @@ function delete_existing_weather_file() {
   }
 }
 
+// Tests
 async function test_weather_writes_file() {
-  await sut({ city: 'london'})
+  await sut({ city: 'london'}, weather_stub)
   assert.ok(fs.existsSync(filename), 'failed finding file ' + filename)
 }
 
