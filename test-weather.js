@@ -32,7 +32,10 @@ function test_weather_file_contains_weather_data() {
 }
 
 async function run_tests() {
+  // setup
   delete_existing_weather_file()
+
+  // actual tests
   await test_weather_writes_file()
   test_weather_file_contains_weather_data()
 }
