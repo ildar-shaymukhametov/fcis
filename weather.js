@@ -31,7 +31,7 @@ module.exports = {
     today = today.toISOString().slice(0,10)
     const filename = 'weather-' + today + '.json'
 
-    const result = write_file(filename, data)
+    const result = file_service(filename, data)
     if (result.status == 'success') {
       console.log('wrote file', result.file_written)
     } else {
