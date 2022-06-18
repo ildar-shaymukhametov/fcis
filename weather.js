@@ -19,16 +19,20 @@ module.exports = {
 
     const filename = getFilename()
 
-    const result = file_service(filename, data)
-    if (result.status == 'success') {
-      console.log('wrote file', result.file_written)
-    } else {
-      console.log('error writing file', result.error)
-    }
+    writeToFile(file_service, filename, data)
 
     return (city)
   }
 }
+function writeToFile(file_service, filename, data) {
+  const result = file_service(filename, data)
+  if (result.status == 'success') {
+    console.log('wrote file', result.file_written)
+  } else {
+    console.log('error writing file', result.error)
+  }
+}
+
 function getFilename() {
   let today = new Date()
   today = today.toISOString().slice(0, 10)
