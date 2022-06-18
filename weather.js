@@ -7,16 +7,14 @@ const API_KEY = process.env['API_KEY'] || 'fail'
 
 module.exports = {
   main: async function(context, weather_service = get_weather, file_service = write_file) {
-    let data = {}
-
+    
     let city = getCity(context)
     console.log('getting weather for city', city)
-    try {
-      data = await weather_service(city, API_KEY)
-      console.log('weather data is: ', data)
-    } catch (error) {
-      console.log('failed to read weather data', error)
-      return (error)
+
+    let data = await getData(city);
+    if (data instanceof Error) {
+      console.log("failed to read weather data", error);
+      return data;
     }
 
     let today = new Date()
@@ -31,6 +29,15 @@ module.exports = {
     }
 
     return (city)
+  }
+}
+async function getData(city) {
+  try {
+    var data = await weather_service(city, API_KEY);
+    console.log("weather data is: ", data);
+    return data;
+  } catch (error) {
+    return error;
   }
 }
 function getCity(context) {
