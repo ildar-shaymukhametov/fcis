@@ -7,7 +7,6 @@ const API_KEY = process.env['API_KEY'] || 'fail'
 
 module.exports = {
   main: async function(context, weather_service = get_weather, file_service = write_file) {
-    
     const city = getCity(context)
     console.log('getting weather for city', city)
 
