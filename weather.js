@@ -17,9 +17,7 @@ module.exports = {
       return data;
     }
 
-    const filename = getFilename()
-
-    writeToFile(file_service, filename, data)
+    writeToFile(file_service, getFilename(), data);
 
     return (city)
   }
