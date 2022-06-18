@@ -17,9 +17,7 @@ module.exports = {
       return data;
     }
 
-    let today = new Date()
-    today = today.toISOString().slice(0,10)
-    const filename = 'weather-' + today + '.json'
+    const filename = getFilename()
 
     const result = file_service(filename, data)
     if (result.status == 'success') {
@@ -31,6 +29,13 @@ module.exports = {
     return (city)
   }
 }
+function getFilename() {
+  let today = new Date()
+  today = today.toISOString().slice(0, 10)
+  const filename = 'weather-' + today + '.json'
+  return filename
+}
+
 async function getData(city) {
   try {
     var data = await weather_service(city, API_KEY);
