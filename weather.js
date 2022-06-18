@@ -7,15 +7,9 @@ const API_KEY = process.env['API_KEY'] || 'fail'
 
 module.exports = {
   main: async function(context, weather_service = get_weather, file_service = write_file) {
-    let city = ''
     let data = {}
-    
-    if (context && context?.city) {
-      city = context.city
-    } else {
-      city = 'london'
-    }
 
+    let city = getCity(context)
     console.log('getting weather for city', city)
     try {
       data = await weather_service(city, API_KEY)
@@ -39,3 +33,13 @@ module.exports = {
     return (city)
   }
 }
+function getCity(context) {
+  let city = ''
+  if (context && context?.city) {
+    city = context.city
+  } else {
+    city = 'london'
+  }
+  return city
+}
+
