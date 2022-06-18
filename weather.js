@@ -14,7 +14,7 @@ module.exports = {
     const city = getCity(context);
     console.log("getting weather for city", city);
 
-    const data = await getData(city);
+    const data = await getData(weather_service, city);
     if (data instanceof Error) {
       console.log("failed to read weather data", error);
       return data;
@@ -41,7 +41,7 @@ function getFilename() {
   return filename;
 }
 
-async function getData(city) {
+async function getData(weather_service, city) {
   try {
     var data = await weather_service(city, API_KEY);
     console.log("weather data is: ", data);
