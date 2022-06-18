@@ -6,9 +6,7 @@ const { write_file } = require('./file-adaptor')
 const API_KEY = process.env['API_KEY'] || 'fail'
 
 module.exports = {
-  main: async function(context,
-                       weather_service = get_weather,
-                       file_service = write_file) {
+  main: async function(context, weather_service = get_weather, file_service = write_file) {
     let city = ''
     let data = {}
     
